@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f029ce73863a8af4bb5326e07a21c72e, type: 3}
   m_Name: Question 5
   m_EditorClassIdentifier: 
-  question: Enter new question text here
+  question: What are the Batman characters  Harley Quinn, Catwoman, and Poison Ivy
+    collectively known as?
