@@ -15,6 +15,11 @@ public class Quiz : MonoBehaviour
 
     void Start() 
     {
+        displayQuestion();
+    }
+
+    void displayQuestion()
+    {
         questionText.text = question.getQuestion();
 
         for(int i = 0; i < answerButtons.Length; i++)
@@ -42,6 +47,33 @@ public class Quiz : MonoBehaviour
             questionText.text = "Sorry, the correct answer was;\n" + correctAnswer;
             buttonImage = answerButtons[correctAnswerIndex].GetComponent<Image>();
             buttonImage.sprite = correctAnswerSprite;
+        }
+        setButtonState(false);
+    }
+
+    void getNextQuestion()
+    {
+        setButtonState(true);
+        setDefaultButtonSprite();
+        displayQuestion();
+    }
+
+    void setButtonState(bool state)
+    {
+        for(int i = 0; i < answerButtons.Length; i++)
+        {
+            Button button = answerButtons[i].GetComponent<Button>();
+            button.interactable = state;
+        }
+    }
+
+    async void setDefaultButtonSprite()
+    {
+        Image buttonImage;
+        for(int i = 0; i < answerButtons.Length; i++)
+        {
+            buttonImage = answerButtons[i].GetComponent<Image>();
+            buttonImage.sprite = defaultAnswerSprite;
         }
     }
 }
