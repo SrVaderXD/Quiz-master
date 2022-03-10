@@ -305,6 +305,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e819a0aebaeede4bb005c5cb50a3021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToCompleteQuestion: 15
+  timeToShowCorrectAnswer: 5
+  loadNextQuestion: 0
+  fillFraction: 0
+  isAnsweringQuestion: 0
 --- !u!1001 &399770627
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1412,6 +1417,7 @@ MonoBehaviour:
   - {fileID: 1508713816}
   defaultAnswerSprite: {fileID: 21300000, guid: 38c36b97af3e7d345ba7b906c46052fb, type: 3}
   correctAnswerSprite: {fileID: 21300000, guid: 21e91ca8ef12eb54da7af87efe85fe73, type: 3}
+  timerImage: {fileID: 1950469755}
 --- !u!1 &1950469753
 GameObject:
   m_ObjectHideFlags: 0
