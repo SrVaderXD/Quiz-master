@@ -67,7 +67,7 @@ public class Quiz : MonoBehaviour
         }
     }
 
-    async void setDefaultButtonSprite()
+    void setDefaultButtonSprite()
     {
         Image buttonImage;
         for(int i = 0; i < answerButtons.Length; i++)
