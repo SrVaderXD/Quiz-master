@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   question: "What is Bruce Wayne\u2019s occupation while not fighting crime under
     the cover of night?"
+  answers:
+  - Owner of Wayne Enterprises
+  - Journalist
+  - Police Commisioner
+  - Lawyer
+  correctAnswer: 0

@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Quiz : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI questionText;
     [SerializeField] QuestionSO question;
     [SerializeField] GameObject[] answerButtons;
+    int correctAnswerIndex;
+    [SerializeField] Sprite defaultAnswerSprite;
+    [SerializeField] Sprite correctAnswerSprite;
 
-    async void Start() 
+    void Start() 
     {
         questionText.text = question.getQuestion();
 
@@ -17,6 +21,27 @@ public class Quiz : MonoBehaviour
         {
             TextMeshProUGUI buttonText = answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
             buttonText.text = question.getCorrectAnswer(i);
+        }
+    }
+
+    public void onAnswerSelected(int index)
+    {
+        Image buttonImage;
+
+        if(index == question.getCorrectAnswerIndex())
+        {
+            questionText.text = "Correct!";
+            buttonImage = answerButtons[index].GetComponent<Image>();
+            buttonImage.sprite = correctAnswerSprite;
+        }
+        
+        else
+        {
+            correctAnswerIndex = question.getCorrectAnswerIndex();
+            string correctAnswer = question.getCorrectAnswer(correctAnswerIndex);
+            questionText.text = "Sorry, the correct answer was;\n" + correctAnswer;
+            buttonImage = answerButtons[correctAnswerIndex].GetComponent<Image>();
+            buttonImage.sprite = correctAnswerSprite;
         }
     }
 }

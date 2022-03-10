@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   question: Selina Kyle aka Catwoman is known for her pinpoint accuracy with what
     deadly weapon?
+  answers:
+  - Sword
+  - Dagger
+  - Whip
+  - Bow and arrow
+  correctAnswer: 3
