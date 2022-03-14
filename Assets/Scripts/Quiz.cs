@@ -8,7 +8,8 @@ public class Quiz : MonoBehaviour
 {
     [Header("Questions")]
     [SerializeField] TextMeshProUGUI questionText;
-    [SerializeField] QuestionSO question;
+    [SerializeField] List<QuestionSO> questions = new List<QuestionSO>();
+    QuestionSO currentQuestion;
 
     [Header("Answers")]
     [SerializeField] GameObject[] answerButtons;
@@ -26,8 +27,6 @@ public class Quiz : MonoBehaviour
     void Start() 
     {
         timer = FindObjectOfType<Timer>();
-        getNextQuestion();
-        displayQuestion();
     }
 
     void Update()
@@ -37,12 +36,12 @@ public class Quiz : MonoBehaviour
 
     void displayQuestion()
     {
-        questionText.text = question.getQuestion();
+        questionText.text = currentQuestion.getQuestion();
 
         for(int i = 0; i < answerButtons.Length; i++)
         {
             TextMeshProUGUI buttonText = answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.text = question.getCorrectAnswer(i);
+            buttonText.text = currentQuestion.getCorrectAnswer(i);
         }
     }
 
@@ -50,7 +49,7 @@ public class Quiz : MonoBehaviour
     {
         Image buttonImage;
 
-        if(index == question.getCorrectAnswerIndex())
+        if(index == currentQuestion.getCorrectAnswerIndex())
         {
             questionText.text = "Correct!";
             buttonImage = answerButtons[index].GetComponent<Image>();
@@ -59,8 +58,8 @@ public class Quiz : MonoBehaviour
         
         else
         {
-            correctAnswerIndex = question.getCorrectAnswerIndex();
-            string correctAnswer = question.getCorrectAnswer(correctAnswerIndex);
+            correctAnswerIndex = currentQuestion.getCorrectAnswerIndex();
+            string correctAnswer = currentQuestion.getCorrectAnswer(correctAnswerIndex);
             questionText.text = "Sorry, the correct answer was;\n" + correctAnswer;
             buttonImage = answerButtons[correctAnswerIndex].GetComponent<Image>();
             buttonImage.sprite = correctAnswerSprite;
@@ -77,9 +76,22 @@ public class Quiz : MonoBehaviour
 
     void getNextQuestion()
     {
-        setButtonState(true);
-        setDefaultButtonSprite();
-        displayQuestion();
+        if(questions.Count > 0)
+        {
+            setButtonState(true);
+            setDefaultButtonSprite();
+            getRandomQuestion();
+            displayQuestion();
+        }
+    }
+
+    void getRandomQuestion()
+    {
+        int index = Random.Range(0,questions.Count);
+        currentQuestion = questions[index];
+
+        if(questions.Contains(currentQuestion))
+            questions.Remove(currentQuestion);
     }
 
     void setButtonState(bool state)
