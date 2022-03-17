@@ -14,7 +14,7 @@ public class Quiz : MonoBehaviour
     [Header("Answers")]
     [SerializeField] GameObject[] answerButtons;
     int correctAnswerIndex;
-    bool hasAnsweredEarly;
+    bool hasAnsweredEarly = true;
 
     [Header("Buttons")]
     [SerializeField] Sprite defaultAnswerSprite;
@@ -33,7 +33,7 @@ public class Quiz : MonoBehaviour
 
     public bool isComplete;
 
-    void Start() 
+    void Awake() 
     {
         timer = FindObjectOfType<Timer>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
@@ -86,9 +86,6 @@ public class Quiz : MonoBehaviour
         setButtonState(false);
         timer.cancelTimer();
         scoreText.text = "Score: " + scoreKeeper.calculateScore() + "%";
-
-        if(progressBar.value == progressBar.maxValue)
-            isComplete = true;
     }
 
     void getNextQuestion()
@@ -138,6 +135,11 @@ public class Quiz : MonoBehaviour
 
         if(timer.loadNextQuestion)
         {
+            if(progressBar.value == progressBar.maxValue)
+            {
+                isComplete = true;
+                return;
+            }
             hasAnsweredEarly = false;
             getNextQuestion();
             timer.loadNextQuestion = false;
